@@ -1,0 +1,35 @@
+# --- search ---
+searches:
+  - term: "frontend developer angular"
+    location: "Netherlands"
+  - term: "full stack developer .net"
+    location: "Netherlands"
+  - term: "typescript developer"
+    location: "Amsterdam, Netherlands"
+
+sites: ["indeed", "google"]   # linkedin/glassdoor: add later, they block hardest
+results_per_site: 25
+hours_old: 72                 # only listings from the last 3 days per run
+
+# --- models (swap freely, pipeline is model-agnostic) ---
+scoring_model: "gpt-oss:20b"
+letter_model: "gpt-oss:20b"
+
+# --- thresholds ---
+min_total_score: 3.5          # 0-5 scale; letters only above this
+
+# --- your CV as structured ground truth (the ONLY facts the LLM may use) ---
+cv:
+  name: "Edoardo Colombo"
+  headline: "Frontend-leaning full stack developer"
+  years_experience: 3
+  stack: ["Angular", "AngularJS", "TypeScript", "C#", ".NET", "Azure DevOps"]
+  certifications: ["AZ-900", "AZ-204", "AZ-400", "PSD I"]
+  current: "Developer at Wolters Kluwer, Milan — Genya, large fiscal/accounting web platform"
+  previous: "3 years at Nexus Advanced Technologies"
+  education: "B.Sc. Computer Science, University of Milan-Bicocca"
+  languages: ["Italian (native)", "English (professional)"]
+  notes:
+    - "EU citizen — no visa sponsorship required"
+    - "Relocating to the Netherlands"
+    - "Freelance experience: e-commerce storefront (React/Hydrogen) for a Paris fashion brand"
