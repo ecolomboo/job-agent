@@ -4,6 +4,7 @@
     python run.py score [--limit N] [--model M]  # LLM scoring
     python run.py list                   # show pipeline state
     python run.py list scored            # scored jobs sorted by total desc
+    python run.py serve [--port P]       # web dashboard on localhost
 """
 from __future__ import annotations
 
@@ -113,6 +114,9 @@ def parse_args() -> argparse.Namespace:
     sp_list = sub.add_parser("list", help="show pipeline state")
     sp_list.add_argument("status", nargs="?", default=None, help="filter by status")
 
+    sp_serve = sub.add_parser("serve", help="web dashboard")
+    sp_serve.add_argument("--port", type=int, default=8000, help="port (default 8000)")
+
     return parser.parse_args()
 
 
@@ -126,5 +130,10 @@ if __name__ == "__main__":
         cmd_score(load_config(), limit=args.limit, model=args.model)
     elif cmd == "list":
         cmd_list(args.status)
+    elif cmd == "serve":
+        import uvicorn
+        from web.api import app
+        log.info("dashboard at http://localhost:%d", args.port)
+        uvicorn.run(app, host="0.0.0.0", port=args.port)
     else:
         parse_args().print_help()

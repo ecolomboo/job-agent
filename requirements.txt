@@ -3,3 +3,5 @@ pydantic>=2
 pyyaml
 requests
 pandas
+fastapi
+uvicorn
